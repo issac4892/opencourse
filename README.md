@@ -1,5 +1,5 @@
 # OpenCourse
 
-Free courses for everyone.
+Learn from the world, teach to the world.
 
 - [Database Schema](https://dbdocs.io/issac4892/opencourse)
