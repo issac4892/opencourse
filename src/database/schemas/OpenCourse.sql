@@ -21,7 +21,7 @@ CREATE TABLE "associations" (
 );
 
 CREATE TABLE "organizations" (
-  "id" uuid,
+  "id" uuid PRIMARY KEY,
   "owner_id" uuid,
   "name" text,
   "description" text,
@@ -31,11 +31,12 @@ CREATE TABLE "organizations" (
 CREATE TABLE "organization_users" (
   "organization_id" uuid,
   "user_id" uuid,
-  "created_at" timestamp
+  "created_at" timestamp,
+  PRIMARY KEY ("organization_id", "user_id")
 );
 
 CREATE TABLE "courses" (
-  "id" uuid,
+  "id" uuid PRIMARY KEY,
   "title" text,
   "description" text,
   "image_url" text,
@@ -43,15 +44,15 @@ CREATE TABLE "courses" (
   "created_at" timestamp
 );
 
-CREATE TABLE "categories" (
-  "id" uuid,
+CREATE TABLE "course_categories" (
+  "id" uuid PRIMARY KEY,
   "course_id" uuid,
   "order" number,
   "content" text
 );
 
 CREATE TABLE "lectures" (
-  "id" uuid,
+  "id" uuid PRIMARY KEY,
   "course_id" uuid,
   "parent_category" uuid,
   "content" text,
@@ -62,7 +63,7 @@ CREATE TABLE "lectures" (
 );
 
 CREATE TABLE "course_notice" (
-  "id" uuid,
+  "id" uuid PRIMARY KEY,
   "course_id" uuid,
   "created_at" timestamp,
   "title" varchar(70),
@@ -121,11 +122,11 @@ ALTER TABLE "organization_users" ADD FOREIGN KEY ("user_id") REFERENCES "users" 
 
 ALTER TABLE "courses" ADD FOREIGN KEY ("organization_id") REFERENCES "organizations" ("id") ON DELETE RESTRICT;
 
-ALTER TABLE "categories" ADD FOREIGN KEY ("course_id") REFERENCES "courses" ("id") ON DELETE CASCADE;
+ALTER TABLE "course_categories" ADD FOREIGN KEY ("course_id") REFERENCES "courses" ("id") ON DELETE CASCADE;
 
 ALTER TABLE "lectures" ADD FOREIGN KEY ("course_id") REFERENCES "courses" ("id") ON DELETE CASCADE;
 
-ALTER TABLE "lectures" ADD FOREIGN KEY ("parent_category") REFERENCES "categories" ("id") ON DELETE SET NULL;
+ALTER TABLE "lectures" ADD FOREIGN KEY ("parent_category") REFERENCES "course_categories" ("id") ON DELETE SET NULL;
 
 ALTER TABLE "course_notice" ADD FOREIGN KEY ("course_id") REFERENCES "courses" ("id") ON DELETE CASCADE;
 
