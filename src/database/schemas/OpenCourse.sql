@@ -6,7 +6,8 @@ CREATE TYPE "Providers" AS ENUM (
 CREATE TABLE "users" (
   "id" uuid PRIMARY KEY,
   "email" text,
-  "name" varchar(50)
+  "name" varchar(50),
+  "created_at" timestamp
 );
 
 CREATE TABLE "associations" (
@@ -15,19 +16,22 @@ CREATE TABLE "associations" (
   "user_id" uuid,
   "access_token" text,
   "refresh_token" text,
-  "provider_user_id" text
+  "provider_user_id" text,
+  "created_at" timestamp
 );
 
 CREATE TABLE "organizations" (
   "id" uuid,
   "owner" uuid,
   "name" text,
-  "description" text
+  "description" text,
+  "created_at" timestamp
 );
 
 CREATE TABLE "organization_users" (
   "organization_id" uuid,
-  "user_id" uuid
+  "user_id" uuid,
+  "created_at" timestamp
 );
 
 CREATE TABLE "courses" (
@@ -35,7 +39,8 @@ CREATE TABLE "courses" (
   "title" text,
   "description" text,
   "image_url" text,
-  "organization_id" uuid
+  "organization_id" uuid,
+  "created_at" timestamp
 );
 
 CREATE TABLE "categories" (
@@ -52,7 +57,8 @@ CREATE TABLE "lectures" (
   "content" text,
   "description" text,
   "image_url" text,
-  "youtube_video" text
+  "youtube_video" text,
+  "created_at" timestamp
 );
 
 CREATE TABLE "course_notice" (
@@ -70,21 +76,24 @@ CREATE TABLE "course_question" (
   "title" varchar(70),
   "content" text,
   "private" bool DEFAULT false,
-  "author" uuid
+  "author" uuid,
+  "created_at" timestamp
 );
 
 CREATE TABLE "course_question_comment" (
   "id" uuid,
   "question_id" uuid,
   "content" text,
-  "author" uuid
+  "author" uuid,
+  "created_at" timestamp
 );
 
 CREATE TABLE "lecture_comment" (
   "id" uuid,
   "lecture_id" uuid,
   "content" text,
-  "author" uuid
+  "author" uuid,
+  "created_at" timestamp
 );
 
 CREATE TABLE "enrollments" (
