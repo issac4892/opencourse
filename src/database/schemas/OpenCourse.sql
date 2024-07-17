@@ -22,7 +22,7 @@ CREATE TABLE "associations" (
 
 CREATE TABLE "organizations" (
   "id" uuid,
-  "owner" uuid,
+  "owner_id" uuid,
   "name" text,
   "description" text,
   "created_at" timestamp
@@ -113,7 +113,7 @@ CREATE TABLE "course_progress" (
 
 ALTER TABLE "associations" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id") ON DELETE CASCADE;
 
-ALTER TABLE "organizations" ADD FOREIGN KEY ("owner") REFERENCES "users" ("id") ON DELETE RESTRICT;
+ALTER TABLE "organizations" ADD FOREIGN KEY ("owner_id") REFERENCES "users" ("id") ON DELETE RESTRICT;
 
 ALTER TABLE "organization_users" ADD FOREIGN KEY ("organization_id") REFERENCES "organizations" ("id") ON DELETE CASCADE;
 
