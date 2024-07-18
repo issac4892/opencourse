@@ -9,4 +9,18 @@ const pool = new Pool({
   database: process.env.DATABASE_NAME
 });
 
-const db = drizzle(pool);
+export const db = drizzle(pool);
+
+export { users } from './schemas/users';
+export { organizations, orgainzation_users } from './schemas/organizations';
+export {
+  courses,
+  course_categories,
+  course_notice,
+  course_question,
+  course_question_comment,
+  course_progress,
+  lectures,
+  lecture_comment,
+  enrollments
+} from './schemas/courses';
