@@ -1,23 +1,6 @@
-CREATE TYPE "Providers" AS ENUM (
-  'GITHUB',
-  'GOOGLE'
-);
-
 CREATE TABLE "users" (
   "id" uuid PRIMARY KEY,
-  "email" text,
-  "name" varchar(50),
-  "created_at" timestamp
-);
-
-CREATE TABLE "associations" (
-  "id" uuid PRIMARY KEY,
-  "provider" Providers,
-  "user_id" uuid,
-  "access_token" text,
-  "refresh_token" text,
-  "provider_user_id" text,
-  "created_at" timestamp
+  "auth0_id" varchar(120)
 );
 
 CREATE TABLE "organizations" (
@@ -111,8 +94,6 @@ CREATE TABLE "course_progress" (
   "complete" bool DEFAULT false,
   "last_opened_at" timestamp
 );
-
-ALTER TABLE "associations" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id") ON DELETE CASCADE;
 
 ALTER TABLE "organizations" ADD FOREIGN KEY ("owner_id") REFERENCES "users" ("id") ON DELETE RESTRICT;
 
